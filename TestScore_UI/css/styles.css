@@ -1,0 +1,138 @@
+body, section,div, button {
+	color: #696969;
+	font-family: 'Red Hat Display', sans-serif;
+	/*font-family: 'Proxima Nova Soft', 'Helvetica Neue', sans-serif;*/
+}
+.quantcol {
+	text-align: left;
+	margin-left: 29%;
+	display: inline-block;
+}
+.verbalcol {
+	text-align: left;
+	margin-left: 5%;
+	display: inline-block;
+}
+input {
+	margin-left: 5px;
+	margin-right: 16px;
+}
+button {
+	display:block;
+	color: white;
+	font-size: 13px;
+	background-color: #4da6ff;
+	border-radius: 15px;
+	border: none;
+	outline: none;
+	padding: 5px 15px;
+	width: 150px;
+  	text-align: center;
+  	margin:30px auto;
+}
+button:hover, button:focus {
+    background: #0073e6;
+}
+/** {box-sizing: border-box}*/
+p, .total, #scorecount, #q, #v {
+	text-align: left;
+	margin-left: 29%;
+	box-sizing: border-box;
+}
+.black {color: black;}
+
+#scoredetails {
+	display: none;
+}
+.scoremain {
+	width: 100%;
+	background-color: #F8F8FF; /*#f2f2f2*/
+	margin-left: 0px;
+	padding: 5px;
+	margin-bottom: 30px;
+}
+
+.barcontainer/*, .quantbarcontainer, .verbalbarcontainer*/ {
+  width: 800px;
+  height: 11px;
+  margin-left: 29%;
+  align-items: right;
+  background-color: #f2f2f2;
+  border-radius: 0px 6px 6px 0px;
+}
+.blueyellowbar {
+	float:left;
+	width:100%;
+	/*height: 11px;
+	align-items: right;
+	border-radius: 0px 6px 6px 0px;*/
+} 
+#currentscore, #quantcurr, #verbalcurr {
+	/*width: 43%;*/ /*vary as per scores - JS*/
+	float: left;
+	height: 12px;
+	line-height: 10px;
+	text-align: right; /*score above the bar*/
+	display:inline-block;
+	background: #0fa2eb;
+	border-radius: 0px 6px 6px 0px;
+}
+#differencescore, #quantdiff, #verbaldiff {
+	/*width: 43%;*/ /*vary as per scores - JS*/
+	float: left;
+	height: 12px;
+	line-height: 10px;
+	text-align: right; /*score above the bar*/
+	display:inline-block;
+	background: #ffe28a;
+	border-radius: 0px 6px 6px 0px;
+}
+.quantbarcontainer, .verbalbarcontainer { /*separate quant & verbal scores*/
+	width: 300px;
+	height: 11px;
+	margin-left: 29%;
+	align-items: right;
+	background-color: #f2f2f2;
+	border-radius: 0px 6px 6px 0px;
+	box-sizing: border-box;
+	float:left;
+}
+p {color: #b3b3b3; font-size: 13.7px;}
+
+.pquant, .pverbal {
+	column-width: 10;
+}
+.smallheading {
+	font-size: 15px;
+	color: #737373;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.quantrescol {
+	width: 450px;
+	text-align: left;
+	margin-top: 0px;
+	margin-left: 21%;
+	display: inline-block;
+	box-sizing: border-box;
+}
+.divider {
+	border-left: 1px solid #f2f2f2;
+  	height: 200px;
+  	/*padding: 10px;*/
+  	position: fixed;
+  	padding-right: 20px;
+  	padding-left: 20px;
+  	display: inline-block;
+}
+.verbalrescol {
+	width: 450px;
+	margin-top: 0px;
+	text-align: left;
+	/*margin-left: 0%;*/
+	display: inline-block;
+	box-sizing: border-box;
+}
+#q, #v {
+	margin-top: 3px;
+}

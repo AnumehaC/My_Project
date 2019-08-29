@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>GMAT Score</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="description" content="gmat, e-gmat, gmat score" />
+	<meta name="author" content="anumeha chakravarty" />
+	<link rel="stylesheet" type="text/css" href="css/styles.css" />
+	<link href="https://fonts.googleapis.com/css?family=Red+Hat+Display&display=swap" rel="stylesheet">
+</head>
+<body>
+	<!-- Marks Entery Section -->
+	<form id="quantverbalrow">
+		<div class="quantcol">
+			<h2>Quant</h2>
+			Current <input type="text" value="" id="quantcurrent" maxlength="2" size="4" required />
+			Target <input type="text" value="" id="quanttarget" maxlength="2" size="4" required />
+		</div>
+		<div class="verbalcol">
+			<h2>Verbal</h2>
+			Current <input type="text" value="" id="verbalcurrent" maxlength="2" size="4" required>
+			Target <input type="text" value="" id="verbaltarget" maxlength="2" size="4" required>
+		</div><br/>
+		<button type="button" value="submit" onclick="return scores()">Submit and Refresh</button>
+	</form>
+<!----------------------------------------------------------------------------------------------------->
+	<!-- initially hidden and show on button click -->
+	<section id="scoredetails">
+		<!-- Total Score Main Section -->
+		<section class="scoremain" >
+			<h2 class="total">Total Score</h2>
+			<h2 id="scorecount"></h2> <!-- value will be fetched thru JS -->
+			
+			<div class="barcontainer">
+			  <div class="blueyellowbar">
+			  	<div id="currentscore"></div> <!-- value will be fetched thru JS -->
+			  	<div id="differencescore"></div> <!-- value will be fetched thru JS -->
+			  </div>
+			</div>
+			<br/>
+			<p><small>Your estimated test score per your performance in this mock test is <span id="tcs"></span>, which is <span class="black"><span id="tpd"></span></span><span id="highorlow"></span> your target test score of <span id="totaltarscore"></span>.</small></p>
+		</section>
+		<!----------------------------------------------------------------------------------------------------->
+		<!-- Separate Scores -->
+		<section class="separatescore">
+			<div class="quantrescol">
+				<p class="smallheading">Quant Score</p>
+				<h2 id="q"></h2> <!-- value will be fetched thru JS -->
+
+				<div class="quantbarcontainer">
+					<div class="quantblueyellowbar">
+				  		<div id="quantcurr"></div> <!-- value will be fetched thru JS -->
+			  	  		<div id="quantdiff"></div> <!-- value will be fetched thru JS -->
+			  	  	</div>
+				</div>
+				<br/>
+				<p class="pquant"><small>Your estimated quantitative score per your performance in this mock test is <span id="pq"></span>, which is <span class="black"><span id=qpd></span></span><span id="qhighorlow"></span> your target quantitative score of Q<span id="tarquant"></span>.</small></p>	
+			</div>
+			<div class="divider"></div>
+			<div class="verbalrescol">
+				<p class="smallheading">Verbal Score</p>
+				<h2 id="v"></h2> <!-- value will be fetched thru JS -->
+
+				<div class="verbalbarcontainer">
+				  <div id="verbalcurr"></div> <!-- value will be fetched thru JS -->
+			  	  <div id="verbaldiff"></div> <!-- value will be fetched thru JS -->
+				</div>
+				<br/>
+				<p class="pverbal"><small>Your estimated verbal score per your performance in this mock test is <span id="pv"></span>, which is <span class="black"><span id=vpd></span></span><span id="vhighorlow"></span> your target verbal score of V<span id="tarverbal"></span>.</small></p>
+			</div>
+		</section>
+	</section>
+	<!-- External JS reference -->
+	<!-- <script type="text/javascript" src="js/script.js"></script> -->
+
+	<script>
+
+	function scores() {
+		document.getElementById("scoredetails").style.display = "block";
+		inputMarks();
+	}
+	var qc, qt, vc, vt;
+	//Calculating total current and total target score
+	function calculation() {
+
+		//Main Score
+		var totalCurrentScore = 200 + (qc + vc) *5;
+		console.log("Total current score"+ totalCurrentScore);
+
+		var totalTargetScore = 200 + (qt + vt) *5; //will be used for pointer
+		console.log("Total target score"+ totalTargetScore);
+
+		//difference score - yellow part
+		var differencescore = Math.abs(totalTargetScore - totalCurrentScore);
+		console.log("Difference score"+ differencescore);
+
+		//HTML - total current score - blue part (to print 600 and 100 on the bars)
+		document.getElementById("scorecount").innerHTML = totalCurrentScore;
+		document.getElementById("currentscore").innerHTML = totalCurrentScore;
+		document.getElementById("tcs").innerHTML = totalCurrentScore;
+		document.getElementById("differencescore").innerHTML = differencescore;
+		document.getElementById("tpd").innerHTML = differencescore + " points ";
+
+		document.getElementById("totaltarscore").innerHTML = totalTargetScore;
+
+		// CSS color filling
+		document.getElementById("currentscore").style.width = totalCurrentScore+'px';
+		document.getElementById("differencescore").style.width = differencescore+'px';
+
+		if(totalTargetScore > totalCurrentScore) {
+			document.getElementById("differencescore").innerHTML = "+"+differencescore;
+			document.getElementById("highorlow").innerHTML = "lower than";
+		}
+		else if(totalTargetScore < totalCurrentScore) {
+			document.getElementById("differencescore").innerHTML = "-"+differencescore;
+			document.getElementById("highorlow").innerHTML = "higher than";
+		}
+		else {
+			document.getElementById("differencescore").innerHTML = "";
+			document.getElementById("tpd").innerHTML = "";
+			document.getElementById("highorlow").innerHTML = "equal to";
+		}
+		/******************************************************************************/
+		//Separate Quant Score
+
+		//difference quant score - yellow part
+		var quantDiff = Math.abs(qt - qc);
+		console.log("Quant difference score"+ quantDiff);
+
+		//HTML - total current score - blue part (to print 600 and 100 on the bars)
+		document.getElementById("tarquant").innerHTML = qt;
+
+		document.getElementById("q").innerHTML = "Q" + qc;
+		document.getElementById("pq").innerHTML = "Q" + qc;
+
+		document.getElementById("quantcurr").innerHTML = qc;
+		document.getElementById("quantdiff").innerHTML = quantDiff;
+		document.getElementById("qpd").innerHTML = quantDiff + " points ";
+
+		// CSS color filling
+		document.getElementById("quantcurr").style.width = (5*qc)+'px';
+		document.getElementById("quantdiff").style.width = (5*quantDiff)+'px';
+
+		if(qt > qc) {
+			document.getElementById("quantdiff").innerHTML = "+"+quantDiff;
+			document.getElementById("qhighorlow").innerHTML = "lower than";
+		}
+		else if(qt < qc) {
+			document.getElementById("quantdiff").innerHTML = "-"+quantDiff;
+			document.getElementById("qhighorlow").innerHTML = "higher than";
+		}
+		else {
+			document.getElementById("quantdiff").innerHTML = "";
+			document.getElementById("qpd").innerHTML = "";
+			document.getElementById("qhighorlow").innerHTML = "equal to";
+		}
+		/******************************************************************************/
+		//Separate Verbal Score
+		
+		//difference quant score - yellow part
+		var verbalDiff = Math.abs(vt - vc);
+		console.log("Verbal difference score"+ verbalDiff);
+
+		//HTML - total current score - blue part (to print 600 and 100 on the bars)
+		document.getElementById("tarverbal").innerHTML = vt;
+
+		document.getElementById("v").innerHTML = "V"+vc;
+		document.getElementById("pv").innerHTML = "V" + vc;
+
+		document.getElementById("verbalcurr").innerHTML = vc;
+		document.getElementById("verbaldiff").innerHTML = verbalDiff;
+		document.getElementById("vpd").innerHTML = verbalDiff + " points ";
+
+		// CSS color filling
+		document.getElementById("verbalcurr").style.width = (5*vc) +'px';
+		document.getElementById("verbaldiff").style.width = (5*verbalDiff) +'px';
+
+		if(vt > vc) {
+			document.getElementById("verbaldiff").innerHTML = "+"+verbalDiff;
+			document.getElementById("vhighorlow").innerHTML = "lower than";
+		}
+		else if(vt < vc) {
+			document.getElementById("verbaldiff").innerHTML = "-"+verbalDiff;
+			document.getElementById("vhighorlow").innerHTML = "higher than";
+		}
+		else {
+			document.getElementById("verbaldiff").innerHTML = "";
+			document.getElementById("vpd").innerHTML = "";
+			document.getElementById("vhighorlow").innerHTML = "equal to";
+		}	
+	}
+
+	//Entered marks in the input fields
+	function inputMarks() {
+		
+		//getting values via DOM
+		var quantcur = document.getElementById("quantcurrent").value; //quantcur
+		var quanttar = document.getElementById("quanttarget").value; //quanttar
+
+		var varbalcur = document.getElementById("verbalcurrent").value; //varbalcur
+		var varbaltar = document.getElementById("verbaltarget").value; //varbaltar
+
+		qc = Number(quantcur);
+		qt = Number(quanttar);
+
+		vc = Number(varbalcur);
+		vt = Number(varbaltar);
+
+		if(qc == "" || qt == "" || vc == "" || vt == "") {
+			alert("Field can not be empty or 0!\nPlease enter valid a number.");
+			document.getElementById("quantverbalrow").reset();
+			document.getElementById("scoredetails").style.display = "none";
+			return false;
+		}
+
+		if((typeof qc == "string" || typeof qt == "string" || typeof vc == "string" || typeof vt == "string")
+			|| (isNaN(qc) || isNaN(qt) || isNaN(vc) || isNaN(vt)) || (qc > 60
+				|| qt > 60 || vc > 60 || vt > 60)) {
+
+			alert("One or more of the entered values is not a number or negative number.\nPlease enter positive numbers only(0-60).");
+			document.getElementById("quantverbalrow").reset();
+			document.getElementById("scoredetails").style.display = "none";
+			return false;
+		}
+		calculation();
+	}
+	</script>
+
+</body>
+</html>
